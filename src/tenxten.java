@@ -10,13 +10,11 @@ public class tenxten {
     static int a = (twoDim.length);
     static int b = (twoDim[0].length);
 
-
     private static int randomInt(int from, int to) {
         Random rand = new Random();
         return rand.nextInt(to - from + 1) + from;
     }
-
-    private static void numbersNr() {
+    private static void amountOfSpecificNumbers() {
         int[] numbers = new int[numberColums * numberRows];
         int conter = 0;
 
@@ -25,7 +23,6 @@ public class tenxten {
                 for (int x = 0; x < 10; x++) {
                     if ((twoDim[y][x] / (double) i) == 1) {
                         numbers[i] += i;
-
                     }
                 }
             }
@@ -37,30 +34,27 @@ public class tenxten {
 
     public static void main(String[] args) {
 
+        int sumOfRows[]= new int [numberColums];
+        int row = (twoDim.length);
+        int colum = (twoDim[0].length);
 
-        int a = (twoDim.length);
-        int b = (twoDim[0].length);
-
-        for(int i = 0; i < a; i++){
+        for(int x = 0; x < row; x++){
             int sum = 0;
-            for(int j = 0; j < b; j++) {
-                int x = (randomInt(1, 10));
-                twoDim[i][j] = x;
-                sum += x;
-
-                if (x < 10) {
-                    System.out.print(" " + x + " ");
+            for(int y = 0; y < colum; y++) {
+                int randomNumber = (randomInt(1, 10));
+                twoDim[x][y] = randomNumber;
+                sum += randomNumber;
+                if (randomNumber < 10) {
+                    System.out.print(" " + randomNumber + " ");
                 } else {
-                    System.out.print(x + " ");
+                    System.out.print(randomNumber + " ");
                 }
-                if (j == numberRows - 1){
-                    System.out.print(sum);
-                }
-            }//end of for J
+                sumOfRows[x] = sum;
+            }
             System.out.println();
-        }//end of for i
+        }
 
-        numbersNr();
+        amountOfSpecificNumbers();
     }
 
 
