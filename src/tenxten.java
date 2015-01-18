@@ -14,8 +14,10 @@ public class tenxten {
 
 
     public static void main(String[] args) {
+        int numberRows = 10;
+        int numberColums = 10;
 
-        int [][] twoDim = new int [10][10];
+        int [][] twoDim = new int [numberColums][numberRows];
 
         int a = (twoDim.length);
         int b = (twoDim[0].length);
@@ -32,7 +34,7 @@ public class tenxten {
                 } else {
                     System.out.print(x + " ");
                 }
-                if (j == 9){
+                if (j == numberRows - 1){
                     System.out.print(sum);
                 }
             }//end of for J
