@@ -39,7 +39,6 @@ public class tenxten {
         System.out.println(Arrays.toString(sumOfColumns));
     }
 
-
     private static void sumOfRows() {
         int sumOfRows[] = new int[numberColumns];
         for (int x = 0; x < numberColumns; x++) {
@@ -50,7 +49,7 @@ public class tenxten {
         System.out.println(Arrays.toString(sumOfRows));
     }
 
-    private static void newFeild() {
+    private static void newField() {
         for (int x = 0; x < numberColumns; x++) {
             for (int y = 0; y < numberRows; y++) {
                 int randomNumber = (randomInt(1, 10));
@@ -65,13 +64,26 @@ public class tenxten {
         }
     }
 
+    private static void showField() {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
+                if (grid[x][y] < 10) {
+                    System.out.print(" " + grid[x][y] + " ");
+                } else {
+                    System.out.print(grid[x][y] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     private static int readInt(Scanner scanner){
         int choice = 0;
-        while(choice > 5 || choice < 1) {
-            System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
+        while(choice > 6 || choice < 1) {
+            System.out.println("Pleas enter number 1, 2, 3, 4, 5, or 6");
             while (!scanner.hasNextInt()) {
                 System.out.println("That's not even a number");
-                System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
+                System.out.println("Pleas enter number 1, 2, 3, 4, 5, or 6");
                 scanner.next();
             }
             choice = scanner.nextInt();
@@ -80,28 +92,30 @@ public class tenxten {
     }
 
     public static void main(String[] args) {
-        newFeild();
+        newField();
         while(true) {
             System.out.println("What do you want to do?");
             System.out.println("1. Get a new field");
-            System.out.println("2. Count the numbers in the current field");
-            System.out.println("3. Sum all rows");
-            System.out.println("4. Sum all columns");
-            System.out.println("5. Exit program");
-
+            System.out.println("2. Show current field");
+            System.out.println("3. Count the numbers in the current field");
+            System.out.println("4. Sum all rows");
+            System.out.println("5. Sum all columns");
+            System.out.println("6. Exit program");
             Scanner scanner = new Scanner(System.in);
 
             int choice = readInt(scanner);
 
             if (choice == 1){
-                newFeild();
+                newField();
             } else if (choice == 2){
-                amountOfSpecificNumbers();
+                showField();
             } else if (choice == 3){
-                sumOfRows();
+                amountOfSpecificNumbers();
             } else if (choice == 4){
+                sumOfRows();
+            } else if (choice == 5){
                 sumOfColumns();
-            } else{
+            }else {
                 return;
             }
         }
