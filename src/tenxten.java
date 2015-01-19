@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -30,22 +31,12 @@ public class tenxten {
 
     private static void sumOfRows() {
         int sumOfRows[] = new int[numberColums];
-
         for (int x = 0; x < numberColums; x++) {
-            int sum = 0;
             for (int y = 0; y < numberRows; y++) {
-                int randomNumber = (randomInt(1, 10));
-                twoDim[x][y] = randomNumber;
-                sum += randomNumber;
-                if (randomNumber < 10) {
-                    System.out.print(" " + randomNumber + " ");
-                } else {
-                    System.out.print(randomNumber + " ");
-                }
-                sumOfRows[x] = sum;
+                sumOfRows[x] += twoDim[x][y];
             }
-            System.out.println();
         }
+        System.out.println(Arrays.toString(sumOfRows));
     }
 
     private static void newFeild() {
@@ -71,7 +62,11 @@ public class tenxten {
     public static void main(String[] args) {
 
         newFeild();
+
+        sumOfRows();
+
         amountOfSpecificNumbers();
+
     }
 
 }
