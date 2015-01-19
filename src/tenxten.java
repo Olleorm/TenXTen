@@ -7,8 +7,6 @@ public class tenxten {
     static int numberRows = 10;
     static int numberColums = 10;
     static int [][] twoDim = new int [numberColums][numberRows];
-    static int a = (twoDim.length);
-    static int b = (twoDim[0].length);
 
     private static int randomInt(int from, int to) {
         Random rand = new Random();
@@ -30,17 +28,12 @@ public class tenxten {
         }
     }
 
+    private static void sumOfRows() {
+        int sumOfRows[] = new int[numberColums];
 
-
-    public static void main(String[] args) {
-
-        int sumOfRows[]= new int [numberColums];
-        int row = (twoDim.length);
-        int colum = (twoDim[0].length);
-
-        for(int x = 0; x < row; x++){
+        for (int x = 0; x < numberColums; x++) {
             int sum = 0;
-            for(int y = 0; y < colum; y++) {
+            for (int y = 0; y < numberRows; y++) {
                 int randomNumber = (randomInt(1, 10));
                 twoDim[x][y] = randomNumber;
                 sum += randomNumber;
@@ -53,9 +46,32 @@ public class tenxten {
             }
             System.out.println();
         }
-
-        amountOfSpecificNumbers();
     }
 
+    private static void newFeild() {
+        int row = (twoDim.length);
+        int colum = (twoDim[0].length);
+        for (int x = 0; x < row; x++) {
+            int sum = 0;
+            for (int y = 0; y < colum; y++) {
+                int randomNumber = (randomInt(1, 10));
+                twoDim[x][y] = randomNumber;
+                sum += randomNumber;
+                if (randomNumber < 10) {
+                    System.out.print(" " + randomNumber + " ");
+                } else {
+                    System.out.print(randomNumber + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        newFeild();
+        amountOfSpecificNumbers();
+    }
 
 }
