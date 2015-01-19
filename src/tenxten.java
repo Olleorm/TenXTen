@@ -18,7 +18,7 @@ public class tenxten {
         for (int i = 1; i < 10; i++) {
             for (int y = 0; y < 10; y++) {
                 for (int x = 0; x < 10; x++) {
-                    if ((grid[y][x] / (double) i) == 1) {
+                    if (grid[y][x] == i) {
                         numbers[i] += i;
                     }
                 }
@@ -49,14 +49,10 @@ public class tenxten {
     }
 
     private static void newFeild() {
-        int row = (grid.length);
-        int colum = (grid[0].length);
-        for (int x = 0; x < row; x++) {
-            int sum = 0;
-            for (int y = 0; y < colum; y++) {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
                 int randomNumber = (randomInt(1, 10));
                 grid[x][y] = randomNumber;
-                sum += randomNumber;
                 if (randomNumber < 10) {
                     System.out.print(" " + randomNumber + " ");
                 } else {
