@@ -65,6 +65,20 @@ public class tenxten {
         }
     }
 
+    private static int readInt(Scanner scanner){
+        int choice = 0;
+        while(choice > 5 || choice < 1) {
+            System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
+            while (!scanner.hasNextInt()) {
+                System.out.println("That's not even a number");
+                System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+        }
+        return choice;
+    }
+
     public static void main(String[] args) {
         newFeild();
         while(true) {
@@ -76,11 +90,10 @@ public class tenxten {
             System.out.println("5. Exit program");
 
             Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            if (choice > 6 || choice < 0) {
-                System.out.println("That's not number 1, 2, 3, 4, or 5");
-                System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
-            } else if (choice == 1){
+
+            int choice = readInt(scanner);
+
+            if (choice == 1){
                 newFeild();
             } else if (choice == 2){
                 amountOfSpecificNumbers();
