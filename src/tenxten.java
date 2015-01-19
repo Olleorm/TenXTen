@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Olleorm on 2015-01-17.
@@ -13,6 +14,7 @@ public class tenxten {
         Random rand = new Random();
         return rand.nextInt(to - from + 1) + from;
     }
+
     private static void amountOfSpecificNumbers() {
         int[] numbers = new int[numberColumns * numberRows];
         for (int i = 1; i < 10; i++) {
@@ -63,15 +65,32 @@ public class tenxten {
         }
     }
 
-
     public static void main(String[] args) {
-
         newFeild();
+        while(true) {
+            System.out.println("What do you want to do?");
+            System.out.println("1. Get a new field");
+            System.out.println("2. Count the numbers in the current field");
+            System.out.println("3. Sum all rows");
+            System.out.println("4. Sum all columns");
+            System.out.println("5. Exit program");
 
-        sumOfRows();
-        sumOfColumns();
-        amountOfSpecificNumbers();
-
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            if (choice > 6 || choice < 0) {
+                System.out.println("That's not number 1, 2, 3, 4, or 5");
+                System.out.println("Pleas enter number 1, 2, 3, 4, or 5");
+            } else if (choice == 1){
+                newFeild();
+            } else if (choice == 2){
+                amountOfSpecificNumbers();
+            } else if (choice == 3){
+                sumOfRows();
+            } else if (choice == 4){
+                sumOfColumns();
+            } else{
+                return;
+            }
+        }
     }
-
 }
