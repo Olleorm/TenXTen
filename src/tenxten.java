@@ -95,20 +95,30 @@ public class TenXTen {
 
             int choice = readInt(scanner);
 
-            if (choice == 1){
-                newField();
-                showField();
-            } else if (choice == 2){
-                showField();
-            } else if (choice == 3){
-                amountOfSpecificNumbers();
-            } else if (choice == 4){
-                sumOfRows();
-            } else if (choice == 5){
-                sumOfColumns();
-            }else {
-                return;
+
+
+            switch (choice) {
+                case 1:
+                    newField();
+                    showField();
+                    break;
+                case 2:
+                    showField();
+                    break;
+                case 3:
+                    amountOfSpecificNumbers();
+                    break;
+                case 4:
+                    sumOfRows();
+                    break;
+                case 5:
+                    sumOfColumns();
+                    break;
+                case 6:
+                    return;
+
+                }
             }
         }
     }
-}
+
