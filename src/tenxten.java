@@ -2,25 +2,24 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Created by Olleorm on 2015-01-17.
- */
-public class tenxten {
-    static int numberRows = 10;
-    static int numberColumns = 10;
-    static int [][] grid = new int [numberColumns][numberRows];
+public class TenXTen {
+    private static final int RANDOM_NUMBER = 10;
+    private static final int NUMBER_ROWS = 10;
+    private static final int NUMBER_COLUMNS = 10;
+    static Random rand = new Random();
+    static int [][] grid = new int [NUMBER_COLUMNS][NUMBER_ROWS];
+
 
     private static int randomInt(int from, int to) {
-        Random rand = new Random();
         return rand.nextInt(to - from + 1) + from;
     }
 
     private static void amountOfSpecificNumbers() {
-        int[] numbers = new int[numberColumns * numberRows];
-        for (int i = 1; i < 10; i++) {
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    if (grid[y][x] == i) {
+        int[] numbers = new int[NUMBER_COLUMNS * NUMBER_ROWS];
+        for (int i = 1; i < RANDOM_NUMBER; i++) {
+            for (int y = 0; y < NUMBER_ROWS; y++) {
+                for (int x = 0; x < NUMBER_COLUMNS; x++) {
+                    if (grid[x][y] == i) {
                         numbers[i] += i;
                     }
                 }
@@ -30,9 +29,9 @@ public class tenxten {
     }
 
     private static void sumOfColumns() {
-        int sumOfColumns[] = new int[numberColumns];
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
+        int sumOfColumns[] = new int[NUMBER_COLUMNS];
+        for (int y = 0; y < NUMBER_COLUMNS; y++) {
+            for (int x = 0; x < NUMBER_ROWS; x++) {
                 sumOfColumns[y] += grid[x][y];
             }
         }
@@ -40,9 +39,9 @@ public class tenxten {
     }
 
     private static void sumOfRows() {
-        int sumOfRows[] = new int[numberColumns];
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
+        int sumOfRows[] = new int[NUMBER_COLUMNS];
+        for (int y = 0; y < NUMBER_COLUMNS; y++) {
+            for (int x = 0; x < NUMBER_ROWS; x++) {
                 sumOfRows[x] += grid[x][y];
             }
         }
@@ -50,23 +49,17 @@ public class tenxten {
     }
 
     private static void newField() {
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
-                int randomNumber = (randomInt(1, 10));
+        for (int x = 0; x < NUMBER_COLUMNS; x++) {
+            for (int y = 0; y < NUMBER_ROWS; y++) {
+                int randomNumber = (randomInt(1, RANDOM_NUMBER));
                 grid[x][y] = randomNumber;
-                if (randomNumber < 10) {
-                    System.out.print(" " + randomNumber + " ");
-                } else {
-                    System.out.print(randomNumber + " ");
-                }
             }
-            System.out.println();
         }
     }
 
     private static void showField() {
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
+        for (int x = 0; x < NUMBER_COLUMNS; x++) {
+            for (int y = 0; y < NUMBER_ROWS; y++) {
                 if (grid[x][y] < 10) {
                     System.out.print(" " + grid[x][y] + " ");
                 } else {
@@ -78,21 +71,18 @@ public class tenxten {
     }
 
     private static int readInt(Scanner scanner){
-        int choice = 0;
-        while(choice > 6 || choice < 1) {
-            System.out.println("Pleas enter number 1, 2, 3, 4, 5, or 6");
-            while (!scanner.hasNextInt()) {
-                System.out.println("That's not even a number");
-                System.out.println("Pleas enter number 1, 2, 3, 4, 5, or 6");
-                scanner.next();
-            }
-            choice = scanner.nextInt();
+        String prompt = ("Pleas enter number 1, 2, 3, 4, 5, or 6");
+        System.out.println(prompt);
+        while(!scanner.hasNext("[1-6]")) {
+            System.out.println(prompt);
+            scanner.next();
         }
-        return choice;
+        return scanner.nextInt();
     }
 
     public static void main(String[] args) {
         newField();
+        showField();
         while(true) {
             System.out.println("What do you want to do?");
             System.out.println("1. Get a new field");
@@ -107,6 +97,7 @@ public class tenxten {
 
             if (choice == 1){
                 newField();
+                showField();
             } else if (choice == 2){
                 showField();
             } else if (choice == 3){
