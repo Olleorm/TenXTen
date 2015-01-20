@@ -10,8 +10,8 @@ class NumberGrid {
     public int numberRows;
     int [][] grid;
     public NumberGrid (int chosenNumberRows,int chosenNumberColumns ){
-        numberColumns = chosenNumberRows;
-        numberRows = chosenNumberColumns;
+        numberColumns = chosenNumberColumns;
+        numberRows = chosenNumberRows;
         grid = new int [numberRows][numberColumns];
     }
 
@@ -21,9 +21,9 @@ class NumberGrid {
 
     public void amountOfSpecificNumbers() {
         int[] numbers = new int[11];
-        for (int y = 0; y < numberColumns; y++) {
-            for (int x = 0; x < numberRows; x++) {
-                int value = grid[x][y];
+        for (int y = 0; y < numberRows; y++) {
+            for (int x = 0; x < numberColumns; x++) {
+                int value = grid[y][x];
                 numbers[value]++;
             }
         }
@@ -34,8 +34,8 @@ class NumberGrid {
 
     public void sumOfColumns() {
         int sumOfColumns[] = new int[numberColumns];
-        for (int y = 0; y < numberRows; y++) {
-            for (int x = 0; x < numberColumns; x++) {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
                 sumOfColumns[x] += grid[y][x];
             }
         }
@@ -53,21 +53,21 @@ class NumberGrid {
     }
 
     public void newField() {
-        for (int x = 0; x < numberRows; x++) {
-            for (int y = 0; y < numberColumns; y++) {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
                 int randomNumber = (randomInt(1, RANDOM_NUMBER));
-                grid[x][y] = randomNumber;
+                grid[y][x] = randomNumber;
             }
         }
     }
 
     public void showField() {
-        for (int x = 0; x < numberRows; x++) {
-            for (int y = 0; y < numberColumns; y++) {
-                if (grid[x][y] < 10) {
-                    System.out.print(" " + grid[x][y] + " ");
+        for (int y = 0; y < numberRows; y++) {
+            for (int x = 0; x < numberColumns; x++) {
+                if (grid[y][x] < 10) {
+                    System.out.print(" " + grid[y][x] + " ");
                 } else {
-                    System.out.print(grid[x][y] + " ");
+                    System.out.print(grid[y][x] + " ");
                 }
             }
             System.out.println();
@@ -120,7 +120,7 @@ public class TenXTen {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        NumberGrid popcorn = new NumberGrid(GridColumns.readInt(scanner),GridRows.readInt(scanner));
+        NumberGrid popcorn = new NumberGrid(GridRows.readInt(scanner),GridColumns.readInt(scanner));
 
         popcorn.newField();
         popcorn.showField();
