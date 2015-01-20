@@ -2,23 +2,28 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class TenXTen {
-    private static final int RANDOM_NUMBER = 10;
-    private static final int NUMBER_ROWS = 10;
-    private static final int NUMBER_COLUMNS = 10;
-    static Random rand = new Random();
-    static int [][] grid = new int [NUMBER_COLUMNS][NUMBER_ROWS];
 
+class NumberGrid {
+    private static final int RANDOM_NUMBER = 10;
+    static Random rand = new Random();
+    public int numberRows;
+    public int numberColumns;
+    int [][] grid;
+    public NumberGrid (int chosenNumberColumns,int chosenNumberRows){
+        numberRows = chosenNumberRows;
+        numberColumns = chosenNumberColumns;
+        grid = new int [numberColumns][numberRows];
+    }
 
     private static int randomInt(int from, int to) {
         return rand.nextInt(to - from + 1) + from;
     }
 
-    private static void amountOfSpecificNumbers() {
-        int[] numbers = new int[NUMBER_COLUMNS * NUMBER_ROWS];
+    private void amountOfSpecificNumbers() {
+        int[] numbers = new int[numberColumns * numberRows];
         for (int i = 1; i < RANDOM_NUMBER; i++) {
-            for (int y = 0; y < NUMBER_ROWS; y++) {
-                for (int x = 0; x < NUMBER_COLUMNS; x++) {
+            for (int y = 0; y < numberRows; y++) {
+                for (int x = 0; x < numberColumns; x++) {
                     if (grid[x][y] == i) {
                         numbers[i] += i;
                     }
@@ -28,38 +33,38 @@ public class TenXTen {
         }
     }
 
-    private static void sumOfColumns() {
-        int sumOfColumns[] = new int[NUMBER_COLUMNS];
-        for (int y = 0; y < NUMBER_COLUMNS; y++) {
-            for (int x = 0; x < NUMBER_ROWS; x++) {
+    private void sumOfColumns() {
+        int sumOfColumns[] = new int[numberColumns];
+        for (int y = 0; y < numberColumns; y++) {
+            for (int x = 0; x < numberRows; x++) {
                 sumOfColumns[y] += grid[x][y];
             }
         }
         System.out.println(Arrays.toString(sumOfColumns));
     }
 
-    private static void sumOfRows() {
-        int sumOfRows[] = new int[NUMBER_COLUMNS];
-        for (int y = 0; y < NUMBER_COLUMNS; y++) {
-            for (int x = 0; x < NUMBER_ROWS; x++) {
+    private void sumOfRows() {
+        int sumOfRows[] = new int[numberColumns];
+        for (int y = 0; y < numberColumns; y++) {
+            for (int x = 0; x < numberRows; x++) {
                 sumOfRows[x] += grid[x][y];
             }
         }
         System.out.println(Arrays.toString(sumOfRows));
     }
 
-    private static void newField() {
-        for (int x = 0; x < NUMBER_COLUMNS; x++) {
-            for (int y = 0; y < NUMBER_ROWS; y++) {
+    public void newField() {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
                 int randomNumber = (randomInt(1, RANDOM_NUMBER));
                 grid[x][y] = randomNumber;
             }
         }
     }
 
-    private static void showField() {
-        for (int x = 0; x < NUMBER_COLUMNS; x++) {
-            for (int y = 0; y < NUMBER_ROWS; y++) {
+    public void showField() {
+        for (int x = 0; x < numberColumns; x++) {
+            for (int y = 0; y < numberRows; y++) {
                 if (grid[x][y] < 10) {
                     System.out.print(" " + grid[x][y] + " ");
                 } else {
@@ -70,7 +75,7 @@ public class TenXTen {
         }
     }
 
-    private static int readInt(Scanner scanner){
+    public static int readInt(Scanner scanner){
         String prompt = ("Pleas enter number 1, 2, 3, 4, 5, or 6");
         System.out.println(prompt);
         while(!scanner.hasNext("[1-6]")) {
@@ -80,9 +85,46 @@ public class TenXTen {
         return scanner.nextInt();
     }
 
+}
+
+class GridColumns {
+    public static int readInt(Scanner scanner){
+        String prompt = ("Pleas enter the number of columns you want");
+        System.out.println(prompt);
+        while(!scanner.hasNextInt()) {
+
+            System.out.println("That's not a number");
+            System.out.println(prompt);
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+}
+class GridRows{
+    public static int readInt(Scanner scanner){
+        String prompt = ("Pleas enter the number of rows you want");
+        System.out.println(prompt);
+        while(!scanner.hasNextInt()) {
+
+            System.out.println("That's not a number");
+            System.out.println(prompt);
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+}
+
+
+public class TenXTen {
+
+
     public static void main(String[] args) {
-        newField();
-        showField();
+
+        Scanner scanner = new Scanner(System.in);
+        NumberGrid popcorn = new NumberGrid(GridColumns.readInt(scanner),GridRows.readInt(scanner));
+
+        popcorn.newField();
+        //showField();
         while(true) {
             System.out.println("What do you want to do?");
             System.out.println("1. Get a new field");
@@ -91,33 +133,33 @@ public class TenXTen {
             System.out.println("4. Sum all rows");
             System.out.println("5. Sum all columns");
             System.out.println("6. Exit program");
-            Scanner scanner = new Scanner(System.in);
-
-            int choice = readInt(scanner);
 
 
+            //int choice = readInt(scanner);
 
-            switch (choice) {
-                case 1:
-                    newField();
-                    showField();
-                    break;
-                case 2:
-                    showField();
-                    break;
-                case 3:
-                    amountOfSpecificNumbers();
-                    break;
-                case 4:
-                    sumOfRows();
-                    break;
-                case 5:
-                    sumOfColumns();
-                    break;
-                case 6:
-                    return;
 
-                }
+
+           // switch (choice) {
+              //  case 1:
+                  //  newField();
+                  //  showField();
+              //      break;
+              //  case 2:
+                   // showField();
+              //      break;
+             //   case 3:
+                   // amountOfSpecificNumbers();
+             //       break;
+               // case 4:
+                   // sumOfRows();
+              //      break;
+              //  case 5:
+                   // sumOfColumns();
+              //      break;
+              //  case 6:
+               //     return;
+
+               // }
             }
         }
     }
