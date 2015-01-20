@@ -6,56 +6,55 @@ import java.util.Scanner;
 class NumberGrid {
     private static final int RANDOM_NUMBER = 10;
     static Random rand = new Random();
-    public int numberRows;
     public int numberColumns;
+    public int numberRows;
     int [][] grid;
-    public NumberGrid (int chosenNumberColumns,int chosenNumberRows){
-        numberRows = chosenNumberRows;
-        numberColumns = chosenNumberColumns;
-        grid = new int [numberColumns][numberRows];
+    public NumberGrid (int chosenNumberRows,int chosenNumberColumns ){
+        numberColumns = chosenNumberRows;
+        numberRows = chosenNumberColumns;
+        grid = new int [numberRows][numberColumns];
     }
 
     private static int randomInt(int from, int to) {
         return rand.nextInt(to - from + 1) + from;
     }
 
-    private void amountOfSpecificNumbers() {
-        int[] numbers = new int[numberColumns * numberRows];
-        for (int i = 1; i < RANDOM_NUMBER; i++) {
-            for (int y = 0; y < numberRows; y++) {
-                for (int x = 0; x < numberColumns; x++) {
-                    if (grid[x][y] == i) {
-                        numbers[i] += i;
-                    }
-                }
+    public void amountOfSpecificNumbers() {
+        int[] numbers = new int[11];
+        for (int y = 0; y < numberColumns; y++) {
+            for (int x = 0; x < numberRows; x++) {
+                int value = grid[x][y];
+                numbers[value]++;
             }
-            System.out.println(" " + numbers[i] / i + " " + i + "s" );
+        }
+        for (int i = 1; i < numbers.length; i++) {
+            System.out.println(" " + numbers[i] + " " + i + "s" );
         }
     }
 
-    private void sumOfColumns() {
+    public void sumOfColumns() {
         int sumOfColumns[] = new int[numberColumns];
-        for (int y = 0; y < numberColumns; y++) {
-            for (int x = 0; x < numberRows; x++) {
-                sumOfColumns[y] += grid[x][y];
+        for (int y = 0; y < numberRows; y++) {
+            for (int x = 0; x < numberColumns; x++) {
+                sumOfColumns[x] += grid[y][x];
             }
         }
         System.out.println(Arrays.toString(sumOfColumns));
     }
 
-    private void sumOfRows() {
-        int sumOfRows[] = new int[numberColumns];
-        for (int y = 0; y < numberColumns; y++) {
-            for (int x = 0; x < numberRows; x++) {
-                sumOfRows[x] += grid[x][y];
+    public void sumOfRows() {
+        int sumOfRows[] = new int[numberRows];
+        for (int y = 0; y < numberRows; y++) {
+            for (int x = 0; x < numberColumns; x++) {
+                sumOfRows[y] += grid[y][x];
             }
         }
         System.out.println(Arrays.toString(sumOfRows));
     }
 
     public void newField() {
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
+        for (int x = 0; x < numberRows; x++) {
+            for (int y = 0; y < numberColumns; y++) {
                 int randomNumber = (randomInt(1, RANDOM_NUMBER));
                 grid[x][y] = randomNumber;
             }
@@ -63,8 +62,8 @@ class NumberGrid {
     }
 
     public void showField() {
-        for (int x = 0; x < numberColumns; x++) {
-            for (int y = 0; y < numberRows; y++) {
+        for (int x = 0; x < numberRows; x++) {
+            for (int y = 0; y < numberColumns; y++) {
                 if (grid[x][y] < 10) {
                     System.out.print(" " + grid[x][y] + " ");
                 } else {
@@ -124,7 +123,7 @@ public class TenXTen {
         NumberGrid popcorn = new NumberGrid(GridColumns.readInt(scanner),GridRows.readInt(scanner));
 
         popcorn.newField();
-        //showField();
+        popcorn.showField();
         while(true) {
             System.out.println("What do you want to do?");
             System.out.println("1. Get a new field");
@@ -134,32 +133,29 @@ public class TenXTen {
             System.out.println("5. Sum all columns");
             System.out.println("6. Exit program");
 
+            int choice = popcorn.readInt(scanner);
 
-            //int choice = readInt(scanner);
+            switch (choice) {
+                case 1:
+                    popcorn.newField();
+                    popcorn.showField();
+                    break;
+                case 2:
+                    popcorn.showField();
+                    break;
+                case 3:
+                    popcorn.amountOfSpecificNumbers();
+                    break;
+                case 4:
+                    popcorn.sumOfRows();
+                    break;
+                case 5:
+                    popcorn.sumOfColumns();
+                    break;
+                case 6:
+                    return;
 
-
-
-           // switch (choice) {
-              //  case 1:
-                  //  newField();
-                  //  showField();
-              //      break;
-              //  case 2:
-                   // showField();
-              //      break;
-             //   case 3:
-                   // amountOfSpecificNumbers();
-             //       break;
-               // case 4:
-                   // sumOfRows();
-              //      break;
-              //  case 5:
-                   // sumOfColumns();
-              //      break;
-              //  case 6:
-               //     return;
-
-               // }
+                }
             }
         }
     }
